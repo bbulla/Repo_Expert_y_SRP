@@ -1,14 +1,17 @@
-﻿using System;
+﻿/* using System;
 using System.Text;
 
 namespace Library
 {
     public class AppointmentService
     {
-        public static string CreateAppointment(string name, string id, string phoneNumber, DateTime date, string appoinmentPlace, string doctorName)
+        public static string CreateAppointment(string name, string id, string phoneNumber, DateTime date, string appointmentPlace, string doctorName)
         {
             StringBuilder stringBuilder = new StringBuilder("Scheduling appointment...\n");
             Boolean isValid = true;
+
+            // Empieza la validación de los datos de la cita.
+            // Esta lógica podría ser manejada por una clase separada.
 
             if (string.IsNullOrEmpty(name))
             {
@@ -28,12 +31,11 @@ namespace Library
                 isValid = false;
             }
 
-            if (string.IsNullOrEmpty(appoinmentPlace))
+            if (string.IsNullOrEmpty(appointmentPlace))
             {
-                stringBuilder.Append("Unable to schedule appointment, 'appoinment place' is required\n");
+                stringBuilder.Append("Unable to schedule appointment, 'appointment place' is required\n");
                 isValid = false;
             }
-
 
             if (string.IsNullOrEmpty(doctorName))
             {
@@ -43,11 +45,35 @@ namespace Library
 
             if (isValid)
             {
-                stringBuilder.Append("Appoinment scheduled");
+                stringBuilder.Append("Appointment scheduled");
+            }
+
+            // El método actual realiza tanto la validación como la generación de mensajes,
+            // lo que viola el principio SRP. Se podría dividir estas responsabilidades.
+
+            return stringBuilder.ToString();
+        }
+    }
+}
+ */
+
+using System;
+using System.Text;
+
+namespace Library
+{
+    public class AppointmentService
+    {
+        public static string CreateAppointment(Appointment appointment)
+        {
+            StringBuilder stringBuilder = new StringBuilder("Scheduling appointment...\n");
+
+            if (appointment.Validate())
+            {
+                stringBuilder.Append("Appointment scheduled");
             }
 
             return stringBuilder.ToString();
         }
-
     }
 }
